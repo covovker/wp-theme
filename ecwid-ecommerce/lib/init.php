@@ -222,7 +222,6 @@ function genesis_load_framework() {
 	require_once( GENESIS_ADMIN_DIR . '/theme-settings.php' );
 	require_once( GENESIS_ADMIN_DIR . '/seo-settings.php' );
 	require_once( GENESIS_ADMIN_DIR . '/cpt-archive-settings.php' );
-	require_once( GENESIS_ADMIN_DIR . '/import-export.php' );
 	require_once( GENESIS_ADMIN_DIR . '/inpost-metaboxes.php' );
 	require_once( GENESIS_ADMIN_DIR . '/whats-new.php' );
 	endif;

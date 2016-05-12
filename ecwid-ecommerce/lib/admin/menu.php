@@ -57,12 +57,10 @@ add_action( 'genesis_admin_menu', 'genesis_add_admin_submenus' );
  * @since 0.2.0
  *
  * @see Genesis_Admin_SEO_Settings SEO Settings class
- * @see Genesis_Admin_Import_export Import / Export class
  * @see Genesis_Admin_Readme Readme class
  *
  * @global string $_genesis_seo_settings_pagehook Old backwards-compatible pagehook.
  * @global string $_genesis_admin_seo_settings
- * @global string $_genesis_admin_import_export
  * @global string $_genesis_admin_readme
  *
  * @return null Returns null if Genesis menu is disabled
@@ -73,7 +71,7 @@ function genesis_add_admin_submenus() {
 	if ( ! is_admin() )
 		return;
 
-	global $_genesis_admin_seo_settings, $_genesis_admin_import_export, $_genesis_admin_readme;
+	global $_genesis_admin_seo_settings, $_genesis_admin_readme;
 
 	//* Don't add submenu items if Genesis menu is disabled
 	if( ! current_theme_supports( 'genesis-admin-menu' ) )
@@ -82,17 +80,13 @@ function genesis_add_admin_submenus() {
 	$user = wp_get_current_user();
 
 	//* Add "SEO Settings" submenu item
-	if ( current_theme_supports( 'genesis-seo-settings-menu' ) && get_the_author_meta( 'genesis_seo_settings_menu', $user->ID ) ) {
+	if ( get_the_author_meta( 'genesis_seo_settings_menu', $user->ID ) ) {
 		$_genesis_admin_seo_settings = new Genesis_Admin_SEO_Settings;
 
 		//* set the old global pagehook var for backward compatibility
 		global $_genesis_seo_settings_pagehook;
 		$_genesis_seo_settings_pagehook = $_genesis_admin_seo_settings->pagehook;
 	}
-
-	//* Add "Import/Export" submenu item
-	if ( current_theme_supports( 'genesis-import-export-menu' ) && get_the_author_meta( 'genesis_import_export_menu', $user->ID ) )
-		$_genesis_admin_import_export = new Genesis_Admin_Import_Export;
 
 	//* Add the upgraded page (no menu)
 	new Genesis_Admin_Upgraded;

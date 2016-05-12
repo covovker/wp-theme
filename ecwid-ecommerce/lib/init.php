@@ -62,21 +62,6 @@ function genesis_theme_support() {
 	//* Maybe add support for structural wraps
 	if ( ! current_theme_supports( 'genesis-structural-wraps' ) )
 		add_theme_support( 'genesis-structural-wraps', array( 'header', 'menu-primary', 'menu-secondary', 'footer-widgets', 'footer' ) );
-
-	//* Turn on HTML5 and responsive viewport if Genesis is active
-	if ( ! is_child_theme() ) {
-		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'  ) );
-		add_theme_support( 'genesis-responsive-viewport' );
-		add_theme_support( 'genesis-accessibility', array(
-			'404-page',
-			'drop-down-menu',
-			'headings',
-			'rems',
-			'search-form',
-			'skip-links',
-		) );
-	}
-
 }
 
 add_action( 'genesis_init', 'genesis_post_type_support' );

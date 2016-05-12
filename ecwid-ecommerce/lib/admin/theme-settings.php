@@ -331,16 +331,6 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 			'content' => $theme_settings_help,
 		) );
 		$screen->add_help_tab( array(
-			'id'      => $this->pagehook . '-information',
-			'title'   => __( 'Information', 'genesis' ),
-			'content' => $information_help,
-		) );
-		$screen->add_help_tab( array(
-			'id'      => $this->pagehook . '-feeds',
-			'title'   => __( 'Custom Feeds', 'genesis' ),
-			'content' => $feeds_help,
-		) );
-		$screen->add_help_tab( array(
 			'id'      => $this->pagehook . '-layout',
 			'title'   => __( 'Default Layout', 'genesis' ),
 			'content' => $layout_help,
@@ -407,9 +397,7 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
  	 *
  	 * @since 1.0.0
  	 *
- 	 * @see \Genesis_Admin_Settings::info_box()          Callback for Information box.
  	 * @see \Genesis_Admin_Settings::style_box()         Callback for Color Style box (if supported).
- 	 * @see \Genesis_Admin_Settings::feeds_box()         Callback for Custom Feeds box.
  	 * @see \Genesis_Admin_Settings::layout_box()        Callback for Default Layout box.
  	 * @see \Genesis_Admin_Settings::header_box()        Callback for Header box (if no custom header support).
 	 * @see \Genesis_Admin_Settings::nav_box()           Callback for Navigation box.
@@ -424,12 +412,9 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 
 		add_action( 'genesis_admin_before_metaboxes', array( $this, 'hidden_fields' ) );
 
-		add_meta_box( 'genesis-theme-settings-version', __( 'Information', 'genesis' ), array( $this, 'info_box' ), $this->pagehook, 'main', 'high' );
-
 		if ( current_theme_supports( 'genesis-style-selector' ) )
 			add_meta_box( 'genesis-theme-settings-style-selector', __( 'Color Style', 'genesis' ), array( $this, 'style_box' ), $this->pagehook, 'main' );
 
-		add_meta_box( 'genesis-theme-settings-feeds', __( 'Custom Feeds', 'genesis' ), array( $this, 'feeds_box' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis-theme-settings-layout', __( 'Default Layout', 'genesis' ), array( $this, 'layout_box' ), $this->pagehook, 'main' );
 
 		if ( ! current_theme_supports( 'genesis-custom-header' ) && ! current_theme_supports( 'custom-header' ) )
@@ -472,59 +457,6 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		printf( '<input type="hidden" name="%s" value="%s" />', $this->get_field_name( 'theme_version' ), esc_attr( $this->get_field_value( 'theme_version' ) ) );
 		printf( '<input type="hidden" name="%s" value="%s" />', $this->get_field_name( 'db_version' ), esc_attr( $this->get_field_value( 'db_version' ) ) );
 		printf( '<input type="hidden" name="%s" value="%s" />', $this->get_field_name( 'first_version' ), esc_attr( $this->get_field_value( 'first_version' ) ) );
-
-	}
-
-	/**
-	 * Callback for Theme Settings Information meta box.
-	 *
-	 * If genesis-auto-updates is not supported, some of the fields will not display.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @uses PARENT_THEME_RELEASE_DATE         Date of current release of Genesis Framework.
-	 * @uses \Genesis_Admin::get_field_id()    Construct field ID.
-	 * @uses \Genesis_Admin::get_field_name()  Construct field name.
-	 * @uses \Genesis_Admin::get_field_value() Retrieve value of key under $this->settings_field.
-	 *
-	 * @see \Genesis_Admin_Settings::metaboxes() Register meta boxes on the Theme Settings page.
-	 */
-	function info_box() {
-
-		?>
-		<table class="form-table">
-		<tbody>
-
-			<tr valign="top">
-				<th scope="row"><?php _e( 'Version', 'genesis' ); ?></th>
-				<td><?php $this->field_value( 'theme_version' ); ?></td>
-			</tr>
-
-			<tr valign="top">
-				<th scope="row"><?php _e( 'Released:', 'genesis' ); ?></th>
-				<td>
-					<?php echo PARENT_THEME_RELEASE_DATE; ?>
-					<p><span class="description"><?php sprintf( __( 'This can be helpful for diagnosing problems with your theme when seeking assistance in the <a href="%s" target="_blank">support forums</a>.', 'genesis' ), 'http://www.studiopress.com/support/' ); ?></span></p>
-				</td>
-			</tr>
-
-			<?php if ( current_theme_supports( 'genesis-auto-updates' ) ) : ?>
-			<tr valign="top">
-				<th scope="row"><?php _e( 'Updates', 'genesis' ); ?></th>
-				<td>
-					<p><label for="<?php $this->field_id( 'update' ); ?>"><input type="checkbox" name="<?php $this->field_name( 'update' ); ?>" id="<?php $this->field_id( 'update' ); ?>" value="1"<?php checked( $this->get_field_value( 'update' ) ) . disabled( is_super_admin(), 0 ); ?> />
-					<?php _e( 'Enable Automatic Updates', 'genesis' ); ?></label></p>
-
-					<p><input type="text" name="<?php $this->field_name( 'update_email_address' ); ?>" id="<?php $this->field_id( 'update_email_address' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'update_email_address' ) ); ?>" placeholder="<?php _e( 'Email address', 'genesis' ); ?>" size="30"<?php disabled( 0, is_super_admin() ); ?> /><br />
-					<span class="description"><label for="<?php $this->field_id( 'update_email_address' ); ?>"><?php _e( 'If you provide an email address above, you will be notified via email when a new version of Genesis is available.', 'genesis' ); ?></label></span></p>
-				</td>
-			</tr>
-			<?php endif; ?>
-
-		</tbody>
-		</table>
-
-		<?php
 
 	}
 
@@ -590,52 +522,6 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 		</tbody>
 		</table>
 
-		<?php
-
-	}
-
-	/**
-	 * Callback for Theme Settings Custom Feeds meta box.
-	 *
-	 * @since 1.3.0
-	 *
-	 * @uses \Genesis_Admin::get_field_id()    Construct field ID.
-	 * @uses \Genesis_Admin::get_field_name()  Construct field name.
-	 * @uses \Genesis_Admin::get_field_value() Retrieve value of key under $this->settings_field.
-	 *
-	 * @see \Genesis_Admin_Settings::metaboxes() Register meta boxes on the Theme Settings page.
-	 */
-	function feeds_box() {
-
-		?>
-		<table class="form-table">
-		<tbody>
-
-			<tr valign="top">
-				<th scope="row"><label for="<?php $this->field_id( 'feed_uri' ); ?>"><?php _e( 'Enter your custom feed URL:', 'genesis' ); ?></label></th>
-				<td>
-					<p><input type="text" name="<?php $this->field_name( 'feed_uri' ); ?>" class="regular-text" id="<?php $this->field_id( 'feed_uri' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'feed_uri' ) ); ?>" /></p>
-					<p><label for="<?php $this->field_id( 'redirect_feed' ); ?>"><input type="checkbox" name="<?php $this->field_name( 'redirect_feed' ); ?>" id="<?php $this->field_id( 'redirect_feed' ); ?>" value="1"<?php checked( $this->get_field_value( 'redirect_feed' ) ); ?> /><?php _e( 'Redirect Custom Feed?', 'genesis' ); ?></label></p>
-				</td>
-			</tr>
-
-			<tr valign="top">
-				<th scope="row"><label for="<?php $this->field_id( 'comments_feed_uri' ); ?>"><?php _e( 'Enter your custom comments feed URL:', 'genesis' ); ?></label></th>
-				<td>
-					<p><input type="text" name="<?php $this->field_name( 'comments_feed_uri' ); ?>" class="regular-text" id="<?php $this->field_id( 'comments_feed_uri' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'comments_feed_uri' ) ); ?>" /></p>
-					<p><label for="<?php $this->field_id( 'redirect_comments_feed' ); ?>"><input type="checkbox" name="<?php $this->field_name( 'redirect_comments_feed' ); ?>" id="<?php $this->field_id( 'redirect_comments_feed' ); ?>" value="1"<?php checked( $this->get_field_value( 'redirect_comments__feed' ) ); ?> /><?php _e( 'Redirect Custom Comments Feed?', 'genesis' ); ?></label></p>
-				</td>
-			</tr>
-
-			<tr valign="top">
-				<th scope="row"></th>
-				<td>
-					<p><span class="description"><?php printf( __( 'If your custom feed(s) are not handled by Feedblitz or Feedburner, do not use the redirect options.', 'genesis' ) ); ?></span></p>
-				</td>
-			</tr>
-
-		</tbody>
-		</table>
 		<?php
 
 	}

@@ -49,7 +49,6 @@ function genesis_theme_support() {
 	add_theme_support( 'genesis-seo-settings-menu' );
 	add_theme_support( 'genesis-import-export-menu' );
 	add_theme_support( 'genesis-readme-menu' );
-	add_theme_support( 'genesis-auto-updates' );
 	add_theme_support( 'genesis-breadcrumbs' );
 
 	//* Maybe add support for Genesis menus

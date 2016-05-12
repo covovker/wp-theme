@@ -77,6 +77,9 @@ function genesis_update_check() {
 
 	global $wp_version;
 
+	// disable updates
+	return array();
+
 	//* If updates are disabled
 	if ( ! genesis_get_option( 'update' ) || ! current_theme_supports( 'genesis-auto-updates' ) ) {
 		return array();

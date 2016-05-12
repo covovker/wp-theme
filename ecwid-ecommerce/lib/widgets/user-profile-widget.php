@@ -55,7 +55,7 @@ class Genesis_User_Profile_Widget extends WP_Widget {
 			'height'  => 250,
 		);
 
-		parent::__construct( 'user-profile', __( 'Genesis - User Profile', 'genesis' ), $widget_ops, $control_ops );
+		parent::__construct( 'user-profile', __( 'Ecwid - User Profile', 'genesis' ), $widget_ops, $control_ops );
 
 	}
 

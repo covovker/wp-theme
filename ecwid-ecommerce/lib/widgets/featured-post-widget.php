@@ -72,7 +72,7 @@ class Genesis_Featured_Post extends WP_Widget {
 			'height'  => 350,
 		);
 
-		parent::__construct( 'featured-post', __( 'Genesis - Featured Posts', 'genesis' ), $widget_ops, $control_ops );
+		parent::__construct( 'featured-post', __( 'Ecwid - Featured Posts', 'genesis' ), $widget_ops, $control_ops );
 
 	}
 

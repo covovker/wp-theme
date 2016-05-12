@@ -57,7 +57,7 @@ class Genesis_Featured_Page extends WP_Widget {
 			'height'  => 250,
 		);
 
-		parent::__construct( 'featured-page', __( 'Genesis - Featured Page', 'genesis' ), $widget_ops, $control_ops );
+		parent::__construct( 'featured-page', __( 'Ecwid - Featured Page', 'genesis' ), $widget_ops, $control_ops );
 
 	}
 

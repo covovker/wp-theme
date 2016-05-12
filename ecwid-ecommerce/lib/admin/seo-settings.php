@@ -38,7 +38,7 @@ class Genesis_Admin_SEO_Settings extends Genesis_Admin_Boxes {
 		$menu_ops = array(
 			'submenu' => array(
 				'parent_slug' => 'genesis',
-				'page_title'  => __( 'Genesis - SEO Settings', 'genesis' ),
+				'page_title'  => __( 'Ecwid Theme - SEO Settings', 'genesis' ),
 				'menu_title'  => __( 'SEO Settings', 'genesis' )
 			)
 		);

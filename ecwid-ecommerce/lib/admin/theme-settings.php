@@ -48,9 +48,9 @@ class Genesis_Admin_Settings extends Genesis_Admin_Boxes {
 						'sep_capability' => 'edit_theme_options',
 					),
 					'page_title' => 'Theme Settings',
-					'menu_title' => 'Genesis',
+					'menu_title' => 'Ecwid Theme',
 					'capability' => 'edit_theme_options',
-					'icon_url'   => GENESIS_ADMIN_IMAGES_URL . '/genesis-menu.png',
+					'icon_url'   => GENESIS_ADMIN_IMAGES_URL . '/settings-icon.svg',
 					'position'   => '58.996',
 				),
 				'first_submenu' => array( //* Do not use without 'main_menu'
